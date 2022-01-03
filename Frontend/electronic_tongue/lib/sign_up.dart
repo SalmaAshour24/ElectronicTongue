@@ -10,10 +10,36 @@ class SignUp extends StatefulWidget {
 class _signupState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffffffff),
-      body: const MyCustomForm(),
+    return Stack(
+      children: <Widget>[
+        new Column(
+          children: <Widget>[
+            new Container(
+              height: 200,
+              color: Color(0xff506D84),
+            ),
+            new Container(
+              height: 580,
+              color: Color(0xffEEEEEE),
+            )
+          ],
+        ),
+        new Container(
+          alignment: Alignment.topCenter,
+          padding: new EdgeInsets.only(top: 130, right: 20.0, left: 20.0),
+          child: new Container(
+            height: 600.0,
+            width: MediaQuery.of(context).size.width,
+            child: new Card(
+              child: MyCustomForm(),
+              color: Color(0xffEEEEEE),
+              elevation: 9.0,
+            ),
+          ),
+        )
+      ],
     );
+
   }
 }
 
@@ -41,23 +67,22 @@ class MyCustomFormState extends State<MyCustomForm> {
             children: [
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: BorderRadius.circular(1),
                 ),
                 child: const ListTile(
                   title: Text(
                     "SIGN UP",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontFamily: 'Mouse Memoirs',
-                      fontSize: 30,
+                      fontSize: 20,
                       color: Color(0xffffffff),
                     ),
                   ),
                 ),
                 elevation: 30,
-                color: Color(0xff00008b),
+                color: Color(0xff506D84),
                 margin:
-                    EdgeInsets.only(bottom: 45, top: 50, left: 95, right: 90),
+                    EdgeInsets.only(bottom: 10, left: 95, right: 90),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
@@ -171,7 +196,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 50.0, bottom: 130),
+                padding: const EdgeInsets.only(top: 30.0, bottom: 130),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -184,12 +209,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xff00008b),
+                            primary: Color(0xff506D84),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                             ),
                             textStyle: TextStyle(
-                              fontSize: 40,
+                              fontSize: 25,
                               fontFamily: 'Mouse Memoirs',
                             )),
                         child: Text(
@@ -210,12 +235,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xff00008b),
+                            primary: Color(0xff506D84),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                             ),
                             textStyle: TextStyle(
-                              fontSize: 40,
+                              fontSize: 25,
                               fontFamily: 'Mouse Memoirs',
                             )),
                         child: Text(
