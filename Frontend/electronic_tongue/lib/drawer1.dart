@@ -41,7 +41,7 @@ class _Drawer1State extends State<Drawer1> {
           ListTile(
             leading: Icon(
               Icons.home,
-              color: Color(0xff00008b),
+              color: Color(0xff506D84),
             ),
             title: Text('Home'),
             onTap: () {
@@ -49,7 +49,7 @@ class _Drawer1State extends State<Drawer1> {
             },
           ),
           ListTile(
-            leading: Icon(Icons.circle, size: 20, color: Color(0xff00008b)),
+            leading: Icon(Icons.circle, size: 20, color: Color(0xff506D84)),
             title: Text('Results'),
             onTap: () {
               Navigator.pushNamed(context, '/results');
@@ -60,7 +60,7 @@ class _Drawer1State extends State<Drawer1> {
             thickness: 1.2,
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app_rounded, color: Color(0xff00008b)),
+            leading: Icon(Icons.exit_to_app_rounded, color: Color(0xff506D84)),
             title: Text('Sign out'),
             onTap: () {
               Navigator.pushNamed(context, '/signout');
