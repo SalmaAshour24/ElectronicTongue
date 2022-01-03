@@ -9,11 +9,32 @@ class Results extends StatefulWidget {
 class _ResultsState extends State<Results> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Stack(
+      children: <Widget>[
+        new Column(
+          children: <Widget>[
+            new Container(
+              height: 200,
+              color: Color(0xff506D84),
+            ),
+            new Container(
+              height: 580,
+              color: Color(0xffEEEEEE),
+            )
+          ],
+        ),
+        new Container(
+          alignment: Alignment.topCenter,
+          padding: new EdgeInsets.only(top: 130, right: 20.0, left: 20.0),
+          child: new Container(
+            height: 580.0,
+            width: MediaQuery.of(context).size.width,
+            child: new Card(
+              child:Scaffold(
         drawer: Drawer1(),
         appBar: AppBar(
           //   title: Apps(),
-          backgroundColor: Color(0xff3D008b),
+          backgroundColor: Color(0xff506D84),
         ),
         backgroundColor: Color(0xffffffff),
         body: Container(
@@ -21,7 +42,7 @@ class _ResultsState extends State<Results> {
             Column(children: [
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(35),
+                  borderRadius: BorderRadius.circular(1),
                 ),
                 child: const ListTile(
                   title: Text(
@@ -29,13 +50,13 @@ class _ResultsState extends State<Results> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Mouse Memoirs',
-                      fontSize: 50,
+                      fontSize: 30,
                       color: Color(0xffFFFFFF),
                     ),
                   ),
                 ),
                 elevation: 30,
-                color: Color(0xff00008b),
+                color: Color(0xff506D84),
                 margin:
                     EdgeInsets.only(bottom: 60, top: 60, left: 90, right: 90),
               ),
@@ -44,16 +65,21 @@ class _ResultsState extends State<Results> {
                 const Text('Liquid Name: ',
                     style: TextStyle(
                         fontSize: 35,
-                        fontFamily: 'Mouse Memoirs',
                         color: Colors.black)),
                 const Text('Black Tea -> 70% ',
                     style: TextStyle(
                         fontSize: 23,
-                        fontFamily: 'Mouse Memoirs',
                         color: Colors.black))
               ]),
             ])
           ]),
-        ));
+        )),
+              color: Color(0xffEEEEEE),
+              elevation: 9.0,
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

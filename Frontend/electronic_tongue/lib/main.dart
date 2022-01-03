@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/inp1': (context) => Input1(),
         '/inp2': (context) => Input2(),
         '/results': (context) => Results(),
+        '/signout':(context)=>SignIn(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import 'drawer1.dart';
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -10,54 +12,81 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffffffff),
-      body: const MyCustomForm(),
+    return Stack(
+      children: <Widget>[
+        new Column(
+          children: <Widget>[
+            new Container(
+              height: 200,
+              color: Color(0xff506D84),
+            ),
+            new Container(
+              height: 580,
+              color: Color(0xffEEEEEE),
+            )
+          ],
+        ),
+        new Container(
+          alignment: Alignment.topCenter,
+          padding: new EdgeInsets.only(top: 130, right: 20.0, left: 20.0),
+          child: new Container(
+            height: 600.0,
+            width: MediaQuery.of(context).size.width,
+            child: new Card(
+              child: Home(),
+              color: Color(0xffEEEEEE),
+              elevation: 9.0,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
 
   @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
+  HomeState createState() {
+    return HomeState();
   }
 }
 
-class MyCustomFormState extends State<MyCustomForm> {
-  final _formKey = GlobalKey<FormState>();
+class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _formKey,
-        child: Container(
+    return 
+       Scaffold(
+         drawer: Drawer1(),
+           appBar: AppBar(
+          //   title: Apps(),
+          backgroundColor: Color(0xff506D84),
+        ),
+        body:Container(
           child: ListView(
             children: [
               Card(
-                // shape: RoundedRectangleBorder(
-                //   borderRadius: BorderRadius.circular(35),
-                // ),
+               
                 child: const ListTile(
                   title: Text(
                     "Please choose a button",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontFamily: 'Mouse Memoirs',
-                      fontSize: 30,
+                      fontSize: 20,
                       color: Color(0xffffffff),
                     ),
                   ),
                 ),
                 elevation: 30,
-                color: Color(0xff00008b),
+                color: Color(0xff506D84),
                 margin:
-                    EdgeInsets.only(bottom: 45, top: 70, left: 20, right: 20),
+                    EdgeInsets.only(bottom: 45, top: 20, left: 20, right: 20),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 300, bottom: 130),
+                padding: const EdgeInsets.only(top: 200, bottom: 130),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -70,12 +99,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                           Navigator.pushNamed(context, '/inp1');
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xff00008b),
+                            primary: Color(0xff506D84),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                             ),
                             textStyle: TextStyle(
-                              fontSize: 40,
+                              fontSize: 30,
                               fontFamily: 'Mouse Memoirs',
                             )),
                         child: Text(
@@ -88,20 +117,17 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ),
                     ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
+ 
                             Navigator.pushNamed(context, '/inp2');
-                          }
+                          
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xff00008b),
+                            primary: Color(0xff506D84),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(40),
                             ),
                             textStyle: TextStyle(
-                              fontSize: 40,
+                              fontSize: 30,
                               fontFamily: 'Mouse Memoirs',
                             )),
                         child: Text(
@@ -115,6 +141,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
             ],
           ),
-        ));
+        ) ,
+       );
   }
 }
