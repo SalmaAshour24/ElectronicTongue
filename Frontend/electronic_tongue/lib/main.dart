@@ -1,11 +1,13 @@
-import 'package:electronic_tongue/inputs1.dart';
-import 'package:electronic_tongue/inputt2.dart';
-import 'package:electronic_tongue/main_screen.dart';
+
+import 'package:electronic_tongue/client/main_screen.dart';
 import 'package:electronic_tongue/sign_in.dart';
 import 'package:electronic_tongue/sign_up.dart';
 import 'package:flutter/material.dart';
 
-import 'Results.dart';
+import 'package:electronic_tongue/client/Results.dart';
+
+import 'client/history.dart';
+import 'client/inputs1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,8 +25,10 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignUp(),
         '/mainscreen': (context) => MainScreen(),
         '/inp1': (context) => Input1(),
-        '/inp2': (context) => Input2(),
+        //'/inp2': (context) => Input2(),
         '/results': (context) => Results(),
+        '/history':(context)=>History(),
+        
         '/signout':(context)=>SignIn(),
       },
       debugShowCheckedModeBanner: false,
