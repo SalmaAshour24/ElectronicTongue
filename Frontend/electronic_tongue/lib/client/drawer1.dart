@@ -55,6 +55,13 @@ class _Drawer1State extends State<Drawer1> {
               Navigator.pushNamed(context, '/results');
             },
           ),
+          ListTile(
+            leading: Icon(Icons.circle, size: 20, color: Color(0xff506D84)),
+            title: Text('History'),
+            onTap: () {
+              Navigator.pushNamed(context, '/history');
+            },
+          ),
           Divider(
             height: 1,
             thickness: 1.2,

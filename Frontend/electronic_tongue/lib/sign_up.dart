@@ -10,36 +10,9 @@ class SignUp extends StatefulWidget {
 class _signupState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        new Column(
-          children: <Widget>[
-            new Container(
-              height: 200,
-              color: Color(0xff506D84),
-            ),
-            new Container(
-              height: 580,
-              color: Color(0xffEEEEEE),
-            )
-          ],
-        ),
-        new Container(
-          alignment: Alignment.topCenter,
-          padding: new EdgeInsets.only(top: 130, right: 20.0, left: 20.0),
-          child: new Container(
-            height: 600.0,
-            width: MediaQuery.of(context).size.width,
-            child: new Card(
-              child: MyCustomForm(),
-              color: Color(0xffEEEEEE),
-              elevation: 9.0,
-            ),
-          ),
-        )
-      ],
+    return Scaffold(
+      body: MyCustomForm(),
     );
-
   }
 }
 
@@ -64,7 +37,8 @@ class MyCustomFormState extends State<MyCustomForm> {
           //    image: new DecorationImage(
           //      image: new AssetImage('assets/3.PNG'), fit: BoxFit.cover)),
           child: ListView(
-            children: [
+            children: [SizedBox(height: 100)
+,
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1),

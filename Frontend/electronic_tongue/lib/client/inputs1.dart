@@ -122,7 +122,7 @@ class _Input1State extends State<Input1> {
         ),
         Text(
           output,
-          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold,color: Color(0xff506D84)),
           textAlign: TextAlign.center,
         ),
         Padding(
