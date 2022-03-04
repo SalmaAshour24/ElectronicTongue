@@ -88,7 +88,7 @@ class _Input1State extends State<Input1> {
                           cursorColor: Color(0XFFFFCCFF),
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                              labelText: 'First input',
+                              labelText: 'Second input',
                               border: OutlineInputBorder(),
                               errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -112,7 +112,7 @@ class _Input1State extends State<Input1> {
                           cursorColor: Color(0XFFFFCCFF),
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
-                              labelText: 'First input',
+                              labelText: 'Third input',
                               border: OutlineInputBorder(),
                               errorBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
