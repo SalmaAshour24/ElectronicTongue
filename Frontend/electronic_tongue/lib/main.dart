@@ -1,15 +1,17 @@
-
 import 'package:electronic_tongue/client/main_screen.dart';
 import 'package:electronic_tongue/sign_in.dart';
 import 'package:electronic_tongue/sign_up.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:electronic_tongue/client/Results.dart';
-
 import 'client/history.dart';
 import 'client/inputs1.dart';
 
-void main() {
+void main() async {
+  //eza kan 3nde async w await 3shn yt2ked en 7sal intialize mch hyrun 8er lma yt2keddd
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -27,9 +29,9 @@ class MyApp extends StatelessWidget {
         '/inp1': (context) => Input1(),
         //'/inp2': (context) => Input2(),
         '/results': (context) => Results(),
-        '/history':(context)=>History(),
-        
-        '/signout':(context)=>SignIn(),
+        '/history': (context) => History(),
+
+        '/signout': (context) => SignIn(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

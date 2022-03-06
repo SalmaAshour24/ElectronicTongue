@@ -8,6 +8,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _signupState extends State<SignUp> {
+  signUp() async {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,6 +29,7 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+  var fn, ln, email, password;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +40,8 @@ class MyCustomFormState extends State<MyCustomForm> {
           //    image: new DecorationImage(
           //      image: new AssetImage('assets/3.PNG'), fit: BoxFit.cover)),
           child: ListView(
-            children: [SizedBox(height: 100)
-,
+            children: [
+              SizedBox(height: 100),
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1),
@@ -55,16 +58,21 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
                 elevation: 30,
                 color: Color(0xff506D84),
-                margin:
-                    EdgeInsets.only(bottom: 10, left: 95, right: 90),
+                margin: EdgeInsets.only(bottom: 10, left: 95, right: 90),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
                 child: Container(
                   child: TextFormField(
+                    onSaved: (value) {
+                      fn = value;
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
+                      }
+                      if (value.length <= 2) {
+                        return 'Please text should be greater than 2';
                       }
                       return null;
                     },
@@ -83,9 +91,15 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
+                    onSaved: (value) {
+                      ln = value;
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
+                      }
+                      if (value.length <= 2) {
+                        return 'Please text should be greater than 2';
                       }
                       return null;
                     },
@@ -104,6 +118,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
+                    onSaved: (value) {
+                      email = value;
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
@@ -129,6 +146,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
+                    onSaved: (value) {
+                      password = value;
+                    },
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
