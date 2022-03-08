@@ -10,6 +10,7 @@ class Input1 extends StatefulWidget {
 }
 
 class _Input1State extends State<Input1> {
+  final _formKey = GlobalKey<FormState>();
   String output = 'Milk Classification';
   dynamic url;
   var Data;
@@ -22,7 +23,11 @@ class _Input1State extends State<Input1> {
         //   title: Apps(),
         backgroundColor: Color(0xff506D84),
       ),
-      body: ListView(children: [
+      body: SafeArea(child: Form(
+          key: _formKey,
+
+      
+      child:ListView(children: [
         const Card(
           // shape: RoundedRectangleBorder(
           //   borderRadius: BorderRadius.circular(35),
@@ -52,6 +57,7 @@ class _Input1State extends State<Input1> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 20.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.numberWithOptions(decimal: true),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Enter input';
@@ -129,6 +135,11 @@ class _Input1State extends State<Input1> {
           padding: const EdgeInsets.only(top: 20, left: 40, right: 40),
           child: ElevatedButton(
               onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Processing Data')),
+                            );
+                          }
                 url = 'http://10.0.2.2:5000/milk?input1=' +
                     inp1 +'&input2=' + inp2 + '&input3=' + inp3;
                 Data = await Getdata(url);
@@ -150,7 +161,7 @@ class _Input1State extends State<Input1> {
                 ),
               )),
         ),
-      ]),
+      ]),),),
     );
   }
 }

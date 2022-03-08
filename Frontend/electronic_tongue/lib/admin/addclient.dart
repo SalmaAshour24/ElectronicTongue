@@ -125,7 +125,7 @@ class HomeState extends State<Home> {
                 ),
                 child: const ListTile(
                   title: Text(
-                    "SIGN UP",
+                    "ADD CLIENT",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20,
@@ -293,7 +293,7 @@ class HomeState extends State<Home> {
                               fontFamily: 'Mouse Memoirs',
                             )),
                         child: Text(
-                          'SIGN UP',
+                          'ADD',
                           style: TextStyle(
                             color: Color(0xffffffff),
                           ),
