@@ -1,8 +1,10 @@
+import 'package:electronic_tongue/admin/main_screenA.dart';
 import 'package:electronic_tongue/client/main_screen.dart';
 import 'package:electronic_tongue/sign_in.dart';
 import 'package:electronic_tongue/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:electronic_tongue/client/Results.dart';
+import 'admin/addclient.dart';
 import 'client/history.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'client/inputs1.dart';
@@ -41,8 +43,9 @@ class MyApp extends StatelessWidget {
         //'/inp2': (context) => Input2(),
         '/results': (context) => Results(),
         '/history': (context) => History(),
-
+        '/mainscreenA': (context) => MainScreenA(),
         '/signout': (context) => SignIn(),
+        '/addclient': (context) => AddClient(),
       },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',

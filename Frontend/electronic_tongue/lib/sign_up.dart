@@ -60,7 +60,7 @@ signUp() async {
                 "firstname": firstname,
                 "lastname": lastname,
                 "email": email,
-                "usertype": 3,
+                "usertype": 2,
               });
             }
           },
@@ -302,7 +302,7 @@ signUp() async {
                           if (await signUp() == 'ok') {
                             print(
                                 "object....................................................................................................................................");
-                            Navigator.of(context).pushNamed("/signout");
+                            Navigator.pop(context);
                           } else {
                             print("Sign up failed");
                           }
@@ -310,7 +310,6 @@ signUp() async {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),
                             );
-                            Navigator.pop(context);
                           }
                         },
                         style: ElevatedButton.styleFrom(

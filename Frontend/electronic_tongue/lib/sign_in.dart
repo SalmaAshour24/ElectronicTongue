@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class SignIn extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,7 +18,8 @@ class _HomeScreenState extends State<SignIn> {
       });
     });
   }
-@override
+
+  @override
   void initState() {
     //  addData();
     getData();
@@ -33,7 +33,6 @@ class _HomeScreenState extends State<SignIn> {
         new Column(
           children: <Widget>[
             new Container(
-              
               height: 200,
               color: Color(0xff506D84),
             ),
@@ -92,9 +91,9 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-var password, email;
+  var password, email;
 
-signIN() async {
+  signIN() async {
     var formdata = _formKey.currentState;
     if (formdata!.validate()) {
       print('valid');
@@ -175,8 +174,8 @@ signIN() async {
               child: Container(
                 child: TextFormField(
                   onSaved: (val) {
-                              email = val;
-                            },
+                    email = val;
+                  },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
@@ -202,8 +201,8 @@ signIN() async {
               child: Container(
                 child: TextFormField(
                   onSaved: (val) {
-                              password = val;
-                            },
+                    password = val;
+                  },
                   obscureText: true,
                   // obscure tkhalih msh bayn el pass
                   validator: (value) {
@@ -228,28 +227,28 @@ signIN() async {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () async{
-                         var user = await signIN();
+                      onPressed: () async {
+                                  var user = await signIN();
 
                                   if (user != null) {
+                                    print("done");
                                     CollectionReference usersref =
                                         FirebaseFirestore.instance
                                             .collection("users");
-
+print(email);
                                     await usersref
                                         .where("email", isEqualTo: email)
                                         .get()
                                         .then((value) {
                                       value.docs.forEach((element) {
                                         var UT = element['usertype'];
+                                       
                                         if (UT == 2) {
                                           Navigator.pushNamed(
-                                              context, '/homeD');
-                                        } else if (UT == 3) {
-                                          Navigator.pushNamed(
-                                              context, '/third');
+                                              context, '/mainscreen');
+                                              
                                         } else if (UT == 1) {
-                                          Navigator.pushNamed(context, '/adminc');
+                                          Navigator.pushNamed(context, '/mainscreenA');
                                         }
                                       });
                                     });
@@ -266,13 +265,7 @@ signIN() async {
                                   //     );
                                   //     //  Navigator.pushNamed(context, '/third');
                                   //   }
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
-                          Navigator.pushNamed(context, '/mainscreen');
-                        }
-                      },
+                                },
                       style: ElevatedButton.styleFrom(
                           primary: Color(0xff506D84),
                           shape: RoundedRectangleBorder(
