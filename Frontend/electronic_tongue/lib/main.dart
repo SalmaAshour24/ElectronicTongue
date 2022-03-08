@@ -1,17 +1,28 @@
 import 'package:electronic_tongue/client/main_screen.dart';
 import 'package:electronic_tongue/sign_in.dart';
 import 'package:electronic_tongue/sign_up.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:electronic_tongue/client/Results.dart';
 import 'client/history.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'client/inputs1.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
+
+bool islogin = false;
+
+
+void main() async{
   //eza kan 3nde async w await 3shn yt2ked en 7sal intialize mch hyrun 8er lma yt2keddd
-  WidgetsFlutterBinding.ensureInitialized();
+ WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  var user = FirebaseAuth.instance.currentUser;
+  if (user == null) {
+    islogin = false;
+  } else {
+    islogin = true;
+  }
+
   runApp(const MyApp());
 }
 

@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class SignUp extends StatefulWidget {
   @override
@@ -8,9 +12,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _signupState extends State<SignUp> {
-  signUp() async {}
 
   @override
+  void initState() {
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyCustomForm(),
@@ -29,8 +36,76 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
-  var fn, ln, email, password;
+  late var firstname, lastname, password, email;
 
+signUp() async {
+    var formdata = _formKey.currentState;
+    if (formdata!.validate()) {
+      print('valid');
+      formdata.save();
+      try {
+        await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        DocumentReference r = FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid);
+
+        FirebaseFirestore.instance.runTransaction(
+          (transaction) async {
+            DocumentSnapshot snapShot = await transaction.get(r);
+
+            if (!snapShot.exists) {
+              r.set({
+                "firstname": firstname,
+                "lastname": lastname,
+                "email": email,
+                "usertype": 3,
+              });
+            }
+          },
+
+          // CollectionReference usersref =
+          //     FirebaseFirestore.instance.collection("users");
+          // UserCredential userCredential = await FirebaseAuth.instance
+          //     .createUserWithEmailAndPassword(email: email, password: password);
+          // var currentUser = FirebaseAuth.instance.currentUser;
+          // var uid = currentUser!.uid;
+
+          // usersref.add({
+          //   "firstname": firstname,
+          //   "lastname": lastname,
+          //   "email": email,
+          //   "password": password,
+          //   "usertype": 3,
+          // });
+
+          // return userCredential;
+        );
+      } on FirebaseException catch (e) {
+        if (e.code == 'weak-password') {
+          // Alert(
+          //         context: context,
+          //         title: "Password Issue",
+          //         desc: "It's a weak password please enter stronger one.")
+          //     .show();
+          // print('the password is too weak');
+        } else if (e.code == 'email-already-in-use') {
+          // Alert(
+          //         context: context,
+          //         title: "Email Issue",
+          //         desc: "The account already exists.")
+          //     .show();
+          print('the account already exists');
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      print('not valid');
+    }
+    return 'ok';
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -64,8 +139,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
                 child: Container(
                   child: TextFormField(
-                    onSaved: (value) {
-                      fn = value;
+                   onSaved: (val) {
+                      firstname = val;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -91,8 +166,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
-                    onSaved: (value) {
-                      ln = value;
+                   onSaved: (val) {
+                      lastname = val;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -118,8 +193,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
-                    onSaved: (value) {
-                      email = value;
+                   onSaved: (val) {
+                      email = val;
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -146,8 +221,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
-                    onSaved: (value) {
-                      password = value;
+                   onSaved: (val) {
+                      password = val;
                     },
                     obscureText: true,
                     validator: (value) {
@@ -171,6 +246,9 @@ class MyCustomFormState extends State<MyCustomForm> {
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 child: Container(
                   child: TextFormField(
+                    onSaved: (val) {
+                      password = val;
+                    },
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -220,7 +298,14 @@ class MyCustomFormState extends State<MyCustomForm> {
                       ),
                     ),
                     ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async{
+                          if (await signUp() == 'ok') {
+                            print(
+                                "object....................................................................................................................................");
+                            Navigator.of(context).pushNamed("/signout");
+                          } else {
+                            print("Sign up failed");
+                          }
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Processing Data')),

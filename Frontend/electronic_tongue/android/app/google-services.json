@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "506245798757",
-    "project_id": "electronic-tongue-projec-d8a4b",
-    "storage_bucket": "electronic-tongue-projec-d8a4b.appspot.com"
+    "project_number": "989433840011",
+    "project_id": "e-tongue-ec214",
+    "storage_bucket": "e-tongue-ec214.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:506245798757:android:1ce9b1b6c62c6417c85f8c",
+        "mobilesdk_app_id": "1:989433840011:android:62e47bed68338632ddef8e",
         "android_client_info": {
           "package_name": "com.example.electronic_tongue"
         }
       },
       "oauth_client": [
         {
-          "client_id": "506245798757-7pjf1euaj8vnq1gfd6ucfr08pavuo1ba.apps.googleusercontent.com",
+          "client_id": "989433840011-vp7dphgkkmlrbum14rh3v15um2v7dcuo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAjkEco-bP0QuoXRCXn8fzNTaEdp-JnoCw"
+          "current_key": "AIzaSyBYiS5r-RVNVKZ_7TjXqZuyVjtj-jnzruE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "506245798757-7pjf1euaj8vnq1gfd6ucfr08pavuo1ba.apps.googleusercontent.com",
+              "client_id": "989433840011-vp7dphgkkmlrbum14rh3v15um2v7dcuo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
