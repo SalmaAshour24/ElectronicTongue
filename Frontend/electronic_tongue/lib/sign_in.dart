@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class SignIn extends StatefulWidget {
   @override
@@ -6,6 +9,23 @@ class SignIn extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<SignIn> {
+  getData() {
+    CollectionReference usersref =
+        FirebaseFirestore.instance.collection("users");
+    usersref.get().then((value) {
+      value.docs.forEach((element) {
+        print(element.data());
+        print("================================");
+      });
+    });
+  }
+@override
+  void initState() {
+    //  addData();
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -72,6 +92,41 @@ class MyCustomForm extends StatefulWidget {
 
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+var password, email;
+
+signIN() async {
+    var formdata = _formKey.currentState;
+    if (formdata!.validate()) {
+      print('valid');
+      formdata.save();
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
+        return userCredential;
+      } on FirebaseException catch (e) {
+        if (e.code == 'user-not-found') {
+          // Alert(
+          //         context: context,
+          //         title: "Email Issue",
+          //         desc: "Email doesn't exists.")
+          //     .show();
+          // print('No user found for that email');
+        } else if (e.code == 'wrong-password') {
+          // Alert(
+          //       context: context,
+          //       title: "Password Issue",
+          //       desc: "Password is wrong re-enter it ")
+          //   .show();
+
+          print('re-enter password, the password is wrong');
+        }
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      print('not valid');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +174,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
               child: Container(
                 child: TextFormField(
+                  onSaved: (val) {
+                              email = val;
+                            },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter some text';
@@ -143,6 +201,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
               child: Container(
                 child: TextFormField(
+                  onSaved: (val) {
+                              password = val;
+                            },
                   obscureText: true,
                   // obscure tkhalih msh bayn el pass
                   validator: (value) {
@@ -167,7 +228,44 @@ class MyCustomFormState extends State<MyCustomForm> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async{
+                         var user = await signIN();
+
+                                  if (user != null) {
+                                    CollectionReference usersref =
+                                        FirebaseFirestore.instance
+                                            .collection("users");
+
+                                    await usersref
+                                        .where("email", isEqualTo: email)
+                                        .get()
+                                        .then((value) {
+                                      value.docs.forEach((element) {
+                                        var UT = element['usertype'];
+                                        if (UT == 2) {
+                                          Navigator.pushNamed(
+                                              context, '/homeD');
+                                        } else if (UT == 3) {
+                                          Navigator.pushNamed(
+                                              context, '/third');
+                                        } else if (UT == 1) {
+                                          Navigator.pushNamed(context, '/adminc');
+                                        }
+                                      });
+                                    });
+
+                                    //Navigator.of(context).pushNamed("signout");
+                                  } else {
+                                    print("Sign in failed");
+                                  }
+
+                                  //   if (_formKey.currentState!.validate()) {
+                                  //     ScaffoldMessenger.of(context).showSnackBar(
+                                  //       const SnackBar(
+                                  //           content: Text('Processing Data')),
+                                  //     );
+                                  //     //  Navigator.pushNamed(context, '/third');
+                                  //   }
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')),
