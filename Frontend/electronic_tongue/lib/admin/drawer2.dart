@@ -45,7 +45,7 @@ class _Drawer2State extends State<Drawer2> {
             ),
             title: Text('Home'),
             onTap: () {
-              Navigator.pushNamed(context, '/mainA');
+              Navigator.pushNamed(context, '/mainscreenA');
             },
           ),
           ListTile(
@@ -55,7 +55,6 @@ class _Drawer2State extends State<Drawer2> {
               Navigator.pushNamed(context, '/addclient');
             },
           ),
-           
           Divider(
             height: 1,
             thickness: 1.2,
