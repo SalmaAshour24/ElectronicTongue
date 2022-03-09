@@ -28,57 +28,11 @@ class _HomeScreenState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        new Column(
-          children: <Widget>[
-            new Container(
-              height: 200,
-              color: Color(0xff506D84),
-            ),
-            new Container(
-              height: 580,
-              color: Color(0xffEEEEEE),
-            )
-          ],
-        ),
-        new Container(
-          alignment: Alignment.topCenter,
-          padding: new EdgeInsets.only(top: 130, right: 20.0, left: 20.0),
-          child: new Container(
-            height: 580.0,
-            width: MediaQuery.of(context).size.width,
-            child: new Card(
-              child: MyCustomForm(),
-              color: Color(0xffEEEEEE),
-              elevation: 9.0,
-            ),
-          ),
-        )
-      ],
+    return Scaffold(
+      body: MyCustomForm(),
     );
-
-    // const MyCustomForm(),
   }
 }
-//Column(
-//      children: [
-//      Container(
-//      // width: 100,
-//    height: 200,
-//  color: Color(0xff146356),
-//            child:   Container(
-//              child: Card(
-//              color: Color(0xffF4EEA9),
-//            shape: RoundedRectangleBorder(
-//              borderRadius: BorderRadius.circular(30)),
-//      ),
-//    height: 200,
-//),
-//),
-
-//],
-//),
 
 class MyCustomForm extends StatefulWidget {
   const MyCustomForm({Key? key}) : super(key: key);
@@ -104,19 +58,7 @@ class MyCustomFormState extends State<MyCustomForm> {
         return userCredential;
       } on FirebaseException catch (e) {
         if (e.code == 'user-not-found') {
-          // Alert(
-          //         context: context,
-          //         title: "Email Issue",
-          //         desc: "Email doesn't exists.")
-          //     .show();
-          // print('No user found for that email');
         } else if (e.code == 'wrong-password') {
-          // Alert(
-          //       context: context,
-          //       title: "Password Issue",
-          //       desc: "Password is wrong re-enter it ")
-          //   .show();
-
           print('re-enter password, the password is wrong');
         }
       } catch (e) {
@@ -132,24 +74,12 @@ class MyCustomFormState extends State<MyCustomForm> {
     return Form(
       key: _formKey,
       child: ListView(children: [
-        // Container(
-        //   color: Color(0xff00008b),
-        //   height: 70,
-        //   child: Text(
-        //     "Electronic Tongue",
-        //     textAlign: TextAlign.center,
-        //     style: TextStyle(
-        //       fontFamily: 'Mouse Memoirs',
-        //       fontSize: 40,
-        //       color: Color(0xffffffff),
-        //     ),
-        //   ),
-        // ),
         Container(
             child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(
+                  top: 50, left: 20, right: 20, bottom: 8),
               child: Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(1),
@@ -170,7 +100,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 5),
+              padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
               child: Container(
                 child: TextFormField(
                   onSaved: (val) {
@@ -197,7 +127,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 20),
+              padding: const EdgeInsets.only(left: 35, right: 35, top: 20),
               child: Container(
                 child: TextFormField(
                   onSaved: (val) {
@@ -228,44 +158,41 @@ class MyCustomFormState extends State<MyCustomForm> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
-                                  var user = await signIN();
+                        var user = await signIN();
 
-                                  if (user != null) {
-                                    print("done");
-                                    CollectionReference usersref =
-                                        FirebaseFirestore.instance
-                                            .collection("users");
-print(email);
-                                    await usersref
-                                        .where("email", isEqualTo: email)
-                                        .get()
-                                        .then((value) {
-                                      value.docs.forEach((element) {
-                                        var UT = element['usertype'];
-                                       
-                                        if (UT == 2) {
-                                          Navigator.pushNamed(
-                                              context, '/mainscreen');
-                                              
-                                        } else if (UT == 1) {
-                                          Navigator.pushNamed(context, '/mainscreenA');
-                                        }
-                                      });
-                                    });
+                        if (user != null) {
+                          print("done");
+                          CollectionReference usersref =
+                              FirebaseFirestore.instance.collection("users");
+                          print(email);
+                          await usersref
+                              .where("email", isEqualTo: email)
+                              .get()
+                              .then((value) {
+                            value.docs.forEach((element) {
+                              var UT = element['usertype'];
 
-                                    //Navigator.of(context).pushNamed("signout");
-                                  } else {
-                                    print("Sign in failed");
-                                  }
+                              if (UT == 2) {
+                                Navigator.pushNamed(context, '/mainscreen');
+                              } else if (UT == 1) {
+                                Navigator.pushNamed(context, '/mainscreenA');
+                              }
+                            });
+                          });
 
-                                  //   if (_formKey.currentState!.validate()) {
-                                  //     ScaffoldMessenger.of(context).showSnackBar(
-                                  //       const SnackBar(
-                                  //           content: Text('Processing Data')),
-                                  //     );
-                                  //     //  Navigator.pushNamed(context, '/third');
-                                  //   }
-                                },
+                          //Navigator.of(context).pushNamed("signout");
+                        } else {
+                          print("Sign in failed");
+                        }
+
+                        //   if (_formKey.currentState!.validate()) {
+                        //     ScaffoldMessenger.of(context).showSnackBar(
+                        //       const SnackBar(
+                        //           content: Text('Processing Data')),
+                        //     );
+                        //     //  Navigator.pushNamed(context, '/third');
+                        //   }
+                      },
                       style: ElevatedButton.styleFrom(
                           primary: Color(0xff506D84),
                           shape: RoundedRectangleBorder(
