@@ -21,6 +21,11 @@ class _AddClientState extends State<AddClient> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer2(),
+      appBar: AppBar(
+        //   title: Apps(),
+        backgroundColor: Color(0xff506D84),
+      ),
       body: Home(),
     );
   }
