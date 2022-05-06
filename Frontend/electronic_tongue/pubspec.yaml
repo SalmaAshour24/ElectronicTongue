@@ -36,13 +36,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   http:
   search_page: ^2.0.0+1
-  firebase_core: ^1.11.0
   firebase_auth: ^3.3.5
   provider: ^6.0.2
   flutter_slidable: ^1.1.0
   cloud_firestore: ^3.1.6
   firebase_storage: ^10.2.5
   firebase_messaging: ^11.2.5
+  firebase_core: ^1.13.1
+  firebase_database: ^9.0.13
   
 
 dev_dependencies:

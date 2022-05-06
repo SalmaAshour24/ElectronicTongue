@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Drawer1 extends StatefulWidget {
   @override
@@ -70,6 +71,7 @@ class _Drawer1State extends State<Drawer1> {
             leading: Icon(Icons.exit_to_app_rounded, color: Color(0xff506D84)),
             title: Text('Sign out'),
             onTap: () {
+              FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, '/signout');
             },
           ),
