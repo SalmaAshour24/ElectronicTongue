@@ -2,91 +2,92 @@ import 'drawer2.dart';
 import 'package:flutter/material.dart';
 import 'package:search_page/search_page.dart';
 import 'package:electronic_tongue/Model/users.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ClientH extends StatefulWidget {
-  @override
-  _ClientHState createState() => _ClientHState();
-}
 
-class _ClientHState extends State<ClientH> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Home(),
-    );
-  }
-}
+class ClientH extends StatelessWidget {
+  String fname, lname, email;
+  var ut;
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
-
-  @override
-  HomeState createState() {
-    return HomeState();
-  }
-}
-
-class HomeState extends State<Home> {
+  // Costructor to get the data from the previous page.
+  ClientH(
+      {required this.fname,
+      required this.lname,
+      required this.email,
+      required this.ut});
   @override
   Widget build(BuildContext context) {
-    String username="bb";
-    User(username);
     return Scaffold(
       drawer: Drawer2(),
       appBar: AppBar(
         //   title: Apps(),
         backgroundColor: Color(0xff506D84),
-
       ),
       body: Container(
         child: Column(
-          children:  [
+          children: [
             Card(
-              child:  ListTile(
+              child: ListTile(
                 title: Text(
-                  "Bassant Mohamed",
-                  
+                  "Client",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Mouse Memoirs',
-                    fontSize: 20,
+                    fontSize: 25,
                     color: Color(0xffffffff),
                   ),
                 ),
               ),
               elevation: 30,
               color: Color(0xff506D84),
-              margin: EdgeInsets.only(bottom: 20, top: 30, left: 20, right: 20),
-           
+              margin: EdgeInsets.only(bottom: 35, top: 30, left: 20, right: 20),
             ),
-            Padding(padding: EdgeInsets.all(10)),
-             Text('Liquid Name: ',
-                    style: TextStyle(fontSize: 20, color: Colors.black)),
-                 Text(' Milk ->  pure',
-                    style: TextStyle(fontSize: 23, color: Colors.black)),
-                       Padding(padding: EdgeInsets.all(80)),
-
-            ElevatedButton(
-                onPressed: (){                },
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0xff506D84),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    textStyle: TextStyle(
-                      fontSize: 30,
-                      fontFamily: 'Mouse Memoirs',
-                    )),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Text(
+                fname + " " + lname,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'Mouse Memoirs',
+                  fontSize: 20,
+                ),
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
                 child: Text(
-                  'Delete this client',
+                  email,
                   style: TextStyle(
-                    color: Color(0xffffffff),
+                    fontSize: 20,
                   ),
-                )), ],
-        
+                )),
+                
+            // ElevatedButton(
+            //     onPressed: () {
+            //      FirebaseFirestore.instance
+            //                 .collection('users')
+            //                 .doc(ut)
+            //                 .delete();
+            //     },
+            //     style: ElevatedButton.styleFrom(
+            //         primary: Color(0xff506D84),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(10),
+            //         ),
+            //         textStyle: TextStyle(
+            //           fontSize: 25,
+            //           fontFamily: 'Mouse Memoirs',
+            //         )),
+            //     child: Text(
+            //       'Delete',
+            //       style: TextStyle(
+            //         color: Color(0xffffffff),
+            //       ),
+            //     )),
+          ],
         ),
       ),
-      
     );
   }
 }
