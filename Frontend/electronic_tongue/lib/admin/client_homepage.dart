@@ -23,7 +23,18 @@ class ClientH extends StatelessWidget {
       appBar: AppBar(
         //   title: Apps(),
         backgroundColor: Color(0xff506D84),
+        title: Padding(
+            padding: const EdgeInsets.only(left: 292, top: 5),
+            child: IconButton(
+              icon: Icon(Icons.search),
+              tooltip: 'Search your Clients',
+              onPressed: () {
+                Navigator.pushNamed(context, '/Search');
+              }
+            ),
+          ),
       ),
+      
       body: Container(
         child: Column(
           children: [
@@ -62,29 +73,7 @@ class ClientH extends StatelessWidget {
                     fontSize: 20,
                   ),
                 )),
-                
-            // ElevatedButton(
-            //     onPressed: () {
-            //      FirebaseFirestore.instance
-            //                 .collection('users')
-            //                 .doc(ut)
-            //                 .delete();
-            //     },
-            //     style: ElevatedButton.styleFrom(
-            //         primary: Color(0xff506D84),
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(10),
-            //         ),
-            //         textStyle: TextStyle(
-            //           fontSize: 25,
-            //           fontFamily: 'Mouse Memoirs',
-            //         )),
-            //     child: Text(
-            //       'Delete',
-            //       style: TextStyle(
-            //         color: Color(0xffffffff),
-            //       ),
-            //     )),
+               
           ],
         ),
       ),

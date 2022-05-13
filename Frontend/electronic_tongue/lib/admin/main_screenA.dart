@@ -21,6 +21,7 @@ class _MainScreenAState extends State<MainScreenA> {
 }
 
 var userid;
+
 getData() {
   var data = FirebaseFirestore.instance
       .collection('users')
@@ -28,6 +29,7 @@ getData() {
       .snapshots();
   return data;
 }
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -52,38 +54,9 @@ class HomeState extends State<Home> {
             child: IconButton(
               icon: Icon(Icons.search),
               tooltip: 'Search your Clients',
-              onPressed: () => showSearch(
-                context: context,
-                delegate: SearchPage<user>(
-                  onQueryUpdate: (s) => print(s),
-                  items: users,
-                  searchLabel: 'Search  Clients',
-                  searchStyle: TextStyle(color: Color(0xff506D84)),
-                  barTheme: ThemeData.dark(),
-                  suggestion: Center(
-                    child: Text('search ..'),
-                  ),
-                  failure: Center(
-                    child: Text(
-                      'No clients found :(',
-                      style: TextStyle(color: Color(0xffffffff)),
-                    ),
-                  ),
-                  filter: (User) => [
-                    User.username,
-                  ],
-                  builder: (User) => ListTile(
-                    title: Text(
-                      User.username,
-                      style: TextStyle(color: Color(0xffffffff)),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/clientH');
-                    },
-                    //trailing: Text('${person.age} yo'),
-                  ),
-                ),
-              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/Search');
+              }
             ),
           ),
         ),
@@ -126,7 +99,7 @@ class HomeState extends State<Home> {
                       return ListView(
                         children: snapshot.data!.docs.map((document) {
                           return ListTile(
-                            title: Text(document['firstname'],
+                            title: Text(document['firstname']+" "+document['lastname'],
                                 style: TextStyle(
                                   fontSize: 18,
                                 )),

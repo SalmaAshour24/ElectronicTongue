@@ -1,4 +1,5 @@
 import 'package:electronic_tongue/admin/main_screenA.dart';
+import 'package:electronic_tongue/admin/search.dart';
 import 'package:electronic_tongue/client/main_screen.dart';
 import 'package:electronic_tongue/sign_in.dart';
 import 'package:electronic_tongue/sign_up.dart';
@@ -46,7 +47,9 @@ class MyApp extends StatelessWidget {
         '/mainscreenA': (context) => MainScreenA(),
         '/signout': (context) => SignIn(),
         '/addclient': (context) => AddClient(),
+        '/Search': (context) => SearchBar(),
       },
+
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(

@@ -25,6 +25,16 @@ class _AddClientState extends State<AddClient> {
       appBar: AppBar(
         //   title: Apps(),
         backgroundColor: Color(0xff506D84),
+        title: Padding(
+            padding: const EdgeInsets.only(left: 292, top: 5),
+            child: IconButton(
+              icon: Icon(Icons.search),
+              tooltip: 'Search your Clients',
+              onPressed: () {
+                Navigator.pushNamed(context, '/Search');
+              }
+            ),
+          ),
       ),
       body: Home(),
     );
