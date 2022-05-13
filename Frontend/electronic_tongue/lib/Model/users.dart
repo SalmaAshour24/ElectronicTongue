@@ -1,14 +1,14 @@
-class User {
+class user {
   final String username;
   // final num age;
 
-  User(this.username);
+  user(this.username);
 }
 
-List<User> users = [
-  User('Salma'),
-  User('shadwa'),
-  User('maha'),
-  User('bassant'),
+List<user> users = [
+  user('Salma'),
+  user('shadwa'),
+  user('maha'),
+  user('bassant'),
 
 ];
