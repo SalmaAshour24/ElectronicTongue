@@ -51,7 +51,7 @@ class _Drawer1State extends State<Drawer1> {
           ),
           ListTile(
             leading: Icon(Icons.circle, size: 20, color: Color(0xff506D84)),
-            title: Text('Results'),
+            title: Text('Delete account'),
             onTap: () {
               Navigator.pushNamed(context, '/results');
             },
