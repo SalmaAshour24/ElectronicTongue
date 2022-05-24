@@ -92,6 +92,8 @@ class _Input1State extends State<Input1> {
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: TextFormField(
+                            keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Enter input';
@@ -116,6 +118,8 @@ class _Input1State extends State<Input1> {
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20.0),
                           child: TextFormField(
+                            keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Enter input';
