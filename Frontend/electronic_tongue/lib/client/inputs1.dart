@@ -154,7 +154,7 @@ class _Input1State extends State<Input1> {
                       );
                     }
 
-                    url = 'http://10.0.2.2:5000/milk?input1=' +
+                    url = 'http://164.92.252.145/?input1=' +
                         PH +
                         '&input2=' +
                         potential +
