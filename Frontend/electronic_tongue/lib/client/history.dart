@@ -67,7 +67,8 @@ class _HistoryState extends State<History> {
                     return ListView(
                       children: snapshot.data!.docs.map((document) {
                         return Container(
-                            padding: EdgeInsets.fromLTRB(30, 20, 20, 20),
+                            padding: EdgeInsets.only(
+                      bottom: 0, top: 15, left: 35, right: 10),
                             child: Row(
                               children: [
                                 Column(
@@ -133,17 +134,19 @@ class _HistoryState extends State<History> {
                                   children: [
                                     Padding(
                                         padding:
-                                            EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                            EdgeInsets.only(
+                      bottom: 0, top: 25, left: 25, right: 10),
                                         child: Text("OutPut",
                                             style: TextStyle(
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.bold))),
                                     Padding(
                                       padding:
-                                          EdgeInsets.fromLTRB(10, 10, 10, 10),
+                                          EdgeInsets.only(
+                      bottom: 5, top: 5, left: 25, right: 10),
                                       child: Text(document['output'],
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 13,
                                           )),
                                     ),
                                   ],
