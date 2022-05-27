@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Drawer1 extends StatefulWidget {
   @override
   _Drawer1State createState() => _Drawer1State();
+}
+
+getData() {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final User? user = auth.currentUser;
+  final uid = user?.uid;
+  var data = FirebaseFirestore.instance.collection('users').doc(uid);
+  return data;
 }
 
 class _Drawer1State extends State<Drawer1> {
@@ -18,17 +27,48 @@ class _Drawer1State extends State<Drawer1> {
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: Row(
               children: [
-                Image.asset(
-                  'assets/profile.jpeg',
-                  scale: 10.2,
-                ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                  padding: const EdgeInsets.only(
+                      bottom: 10, top: 30, left: 60, right: 60),
                   child: Column(
                     children: [
-                      Text('Username'),
-                      Text('name@yahoo.com'),
+                      FutureBuilder<DocumentSnapshot>(
+                        future: getData().get(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<DocumentSnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Text("Something went wrong");
+                          }
+
+                          if (snapshot.hasData && !snapshot.data!.exists) {
+                            return Text("Document does not exist");
+                          }
+
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            Map<String, dynamic> data =
+                                snapshot.data!.data() as Map<String, dynamic>;
+                            return Column(
+                              children: [
+                                Text(
+                                  '${data['firstname']} ${data['lastname']}',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  '${data['email']}',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            );
+                          }
+
+                          return Text("loading");
+                        },
+                      ),
                     ],
                   ),
                 ),
