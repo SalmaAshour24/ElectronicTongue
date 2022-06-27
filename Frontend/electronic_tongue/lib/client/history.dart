@@ -87,7 +87,7 @@ class _HistoryState extends State<History> {
                                           EdgeInsets.fromLTRB(10, 10, 10, 10),
                                       child: Text(document['PH'],
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 11,
                                           )),
                                     ),
                                   ],
@@ -106,7 +106,7 @@ class _HistoryState extends State<History> {
                                           EdgeInsets.fromLTRB(10, 10, 10, 10),
                                       child: Text(document['potential'],
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 11,
                                           )),
                                     ),
                                   ],
@@ -125,7 +125,7 @@ class _HistoryState extends State<History> {
                                           EdgeInsets.fromLTRB(10, 10, 10, 10),
                                       child: Text(document['conductivity'],
                                           style: TextStyle(
-                                            fontSize: 15,
+                                            fontSize: 11,
                                           )),
                                     ),
                                   ],
@@ -143,10 +143,10 @@ class _HistoryState extends State<History> {
                                     Padding(
                                       padding:
                                           EdgeInsets.only(
-                      bottom: 5, top: 5, left: 25, right: 10),
+                      bottom: 5, top: 5, left: 25, right: 11),
                                       child: Text(document['output'],
                                           style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 10,
                                           )),
                                     ),
                                   ],
